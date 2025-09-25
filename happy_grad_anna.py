@@ -841,17 +841,16 @@ def get_premium_eid_wishes():
 def fancy_header(text, element_class="shimmer-text", tag="h1"):
     return f'<{tag} class="{element_class}">{text}</{tag}>'
 
-# Personal memories and quotes for Fatima (Famu)
 def get_personal_memories():
     return [
-        "Our legendary late-night study sessions (and snack attacks) - you're so cute, Famu!",
-        "Laughing until we cried over the silliest things - your humor is the best, Fatima!",
+        "Our legendary late-night study sessions (and snack attacks) - you're so cute, ANNA!",
+        "Laughing until we cried over the silliest things - your humor is the best, AAMNA!",
         "Taking goofy graduation cap selfies together - I love the child in you, bestie!",
         "Cheering each other on through every exam and meltdown - you're so good and loyal!",
         "Our secret bestie handshake before big presentations - you're my best friend forever!",
         "Dancing in the dorm room after good news - you're so cute and full of humor!",
-        "All the inside jokes only we understand, Bestie! You're so good and loyal, Famu!",
-        "Dreaming about our future adventures together - I love your child-like spirit, Fatima!"
+        "All the inside jokes only we understand, Bestie! You're so good and loyal, ANNA!",
+        "Dreaming about our future adventures together - I love your child-like spirit, AAMNA!"
     ]
 
 # Check if today is Eid
@@ -1041,7 +1040,7 @@ def main():
         if st.button("🔓 Decrypt All Images", key="decrypt_all_images", use_container_width=True):
             password = st.session_state.get('user_password', '')
             if password:
-                image_files = ["Anna1.jpg", "Anna2.jpg","Anna3.jpg"]
+                image_files = ["ana1.jpg", "ana2.jpg", "ana3.jpg", "ana4.jpg", "ana5.jpg"]
                 for i, image_file in enumerate(image_files):
                     image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_file)
                     if os.path.exists(image_path):
@@ -1056,86 +1055,92 @@ def main():
             else:
                 st.error("No password available")
     
-    # Image container with 3 images in a row
-    image_files = ["Anna1.jpg", "Anna2.jpg", "Anna3.jpg"]
-    cols = st.columns(3)
+    # Image container with 6 images in 2 rows of 3
+    image_files = ["ana1.jpg", "ana2.jpg", "ana3.jpg", "ana4.jpg", "ana5.jpg", "Coming Soon"]
     
-    for col_idx, image_item in enumerate(image_files):
-        with cols[col_idx]:
-            if image_item == "Coming Soon":
-                # Placeholder for third image
-                st.markdown(f"""
-                    <div class="image-container">
-                        <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📷</div>
-                        <div class="image-title">More Photos Coming Soon!</div>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                            More beautiful memories with Famu to be added!
-                        </p>
-                    </div>
-                """, unsafe_allow_html=True)
-                continue
-            
-            image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_item)
-            image_key = f"image_{col_idx}"
-            
-            # Initialize session state for this image
-            if f"decrypted_{image_key}" not in st.session_state:
-                st.session_state[f"decrypted_{image_key}"] = None
-            
-            if os.path.exists(image_path):
-                # Individual decrypt button for each image
-                if st.button(f"🔓 Decrypt {image_item}", key=f"decrypt_{image_key}"):
-                    password = st.session_state.get('user_password', '')
-                    if password:
-                        with st.spinner(f"Decrypting {image_item}..."):
-                            decrypted_bytes = decrypt_image(image_path, password)
-                            if decrypted_bytes:
-                                st.session_state[f"decrypted_{image_key}"] = decrypted_bytes
-                                st.success(f"{image_item} decrypted successfully!")
-                            else:
-                                st.error(f"Failed to decrypt {image_item}")
-                    else:
-                        st.error("No password available")
-                
-                # Display image if decrypted
-                if st.session_state[f"decrypted_{image_key}"]:
-                    decrypted_image_bytes = st.session_state[f"decrypted_{image_key}"]
-                    try:
-                        # Display image in container
+    # Create two rows of images
+    for row in range(2):
+        cols = st.columns(3)
+        for col_idx in range(3):
+            image_idx = row * 3 + col_idx
+            if image_idx < len(image_files):
+                with cols[col_idx]:
+                    image_item = image_files[image_idx]
+                    
+                    if image_item == "Coming Soon":
+                        # Placeholder for sixth image showing lack of images
                         st.markdown(f"""
                             <div class="image-container">
-                                <div class="image-title">{image_item} - Beautiful Famu! 💜</div>
+                                <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📷</div>
+                                <div class="image-title">No More Images Available!</div>
+                                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
+                                    That's all the beautiful memories with ANNA we have for now!
+                                </p>
                             </div>
                         """, unsafe_allow_html=True)
+                        continue
+                    
+                    image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_item)
+                    image_key = f"image_{image_idx}"
+                    
+                    # Initialize session state for this image
+                    if f"decrypted_{image_key}" not in st.session_state:
+                        st.session_state[f"decrypted_{image_key}"] = None
+                    
+                    if os.path.exists(image_path):
+                        # Individual decrypt button for each image
+                        if st.button(f"🔓 Decrypt {image_item}", key=f"decrypt_{image_key}"):
+                            password = st.session_state.get('user_password', '')
+                            if password:
+                                with st.spinner(f"Decrypting {image_item}..."):
+                                    decrypted_bytes = decrypt_image(image_path, password)
+                                    if decrypted_bytes:
+                                        st.session_state[f"decrypted_{image_key}"] = decrypted_bytes
+                                        st.success(f"{image_item} decrypted successfully!")
+                                    else:
+                                        st.error(f"Failed to decrypt {image_item}")
+                            else:
+                                st.error("No password available")
                         
-                        # Create PIL image from bytes for display
-                        image = Image.open(io.BytesIO(decrypted_image_bytes))
-                        st.image(image, use_container_width=True, caption=f"Beautiful memories with Famu - {image_item}")
-                        
-                    except Exception as e:
-                        st.error(f"Error loading {image_item}: {e}")
-                else:
-                    # Placeholder for encrypted image
-                    st.markdown(f"""
-                        <div class="image-container">
-                            <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">🔒</div>
-                            <div class="image-title">Encrypted {image_item}</div>
-                            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                                Click decrypt to see beautiful Famu moments!
-                            </p>
-                        </div>
-                    """, unsafe_allow_html=True)
-            else:
-                # Placeholder for missing image file
-                st.markdown(f"""
-                    <div class="image-container">
-                        <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📸</div>
-                        <div class="image-title">{image_item} - Coming Soon!</div>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                            Beautiful Famu photo to be added!
-                        </p>
-                    </div>
-                """, unsafe_allow_html=True)
+                        # Display image if decrypted
+                        if st.session_state[f"decrypted_{image_key}"]:
+                            decrypted_image_bytes = st.session_state[f"decrypted_{image_key}"]
+                            try:
+                                # Display image in container
+                                st.markdown(f"""
+                                    <div class=\"image-container\">
+                                        <div class=\"image-title\">{image_item} - Beautiful ANNA! 💜</div>
+                                    </div>
+                                """, unsafe_allow_html=True)
+                                
+                                # Create PIL image from bytes for display
+                                image = Image.open(io.BytesIO(decrypted_image_bytes))
+                                st.image(image, use_container_width=True, caption=f"Beautiful memories with ANNA - {image_item}")
+                                
+                            except Exception as e:
+                                st.error(f"Error loading {image_item}: {e}")
+                        else:
+                            # Placeholder for encrypted image
+                            st.markdown(f"""
+                                <div class=\"image-container\">
+                                    <div style=\"font-size: 3rem; margin-bottom: 15px; text-align: center;\">🔒</div>
+                                    <div class=\"image-title\">Encrypted {image_item}</div>
+                                    <p style=\"font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;\">
+                                        Click decrypt to see beautiful ANNA moments!
+                                    </p>
+                                </div>
+                            """, unsafe_allow_html=True)
+                    else:
+                        # Placeholder for missing image file
+                        st.markdown(f"""
+                            <div class=\"image-container\">
+                                <div style=\"font-size: 3rem; margin-bottom: 15px; text-align: center;\">📸</div>
+                                <div class=\"image-title\">{image_item} - Coming Soon!</div>
+                                <p style=\"font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;\">
+                                    Beautiful ANNA photo to be added!
+                                </p>
+                            </div>
+                        """, unsafe_allow_html=True)
     
     # Video section
     st.markdown("""
@@ -1146,8 +1151,8 @@ def main():
     
     # Video container with 2 rows of 3 videos each
     video_files = [
-        "famu1.mp4", "famu2.mp4", "famu3.mp4",
-        "famu4.mp4", "famu5.mp4", "famu6.mp4"
+        "ANNA1.mp4", "ANNA2.mp4", "ANNA3.mp4",
+        "ANNA4.mp4", "ANNA5.mp4", "ANNA6.mp4"
     ]
     
     # Create two rows of videos
@@ -1189,7 +1194,7 @@ def main():
                                 # Display video in fixed container
                                 st.markdown(f"""
                                     <div class="video-container">
-                                        <div class="video-title">Video {video_idx + 1} - Cute Famu Moments! 💜</div>
+                                        <div class="video-title">Video {video_idx + 1} - Cute ANNA Moments! 💜</div>
                                         <div class="video-player">
                                 """, unsafe_allow_html=True)
                                 
@@ -1208,7 +1213,7 @@ def main():
                                     <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">🔒</div>
                                     <div class="video-title">Encrypted Video {video_idx + 1}</div>
                                     <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                                        Click decrypt to unlock Famu's cute moments!
+                                        Click decrypt to unlock ANNA's cute moments!
                                     </p>
                                 </div>
                             """, unsafe_allow_html=True)
@@ -1219,7 +1224,7 @@ def main():
                                 <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📹</div>
                                 <div class="video-title">Video {video_idx + 1} - Coming Soon!</div>
                                 <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #666; text-align: center;">
-                                    More cute Famu moments to be added!
+                                    More cute ANNA moments to be added!
                                 </p>
                             </div>
                         """, unsafe_allow_html=True)
@@ -1265,7 +1270,7 @@ def main():
                     Bestie, you're a star!
                 </h3>
                 <p style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #7c3aed;">
-                    Here's to us, to you, and to all the memories we'll make. Love you, Fatima!
+                    Here's to us, to you, and to all the memories we'll make.
                 </p>
                 <div style="font-size: 50px; margin: 20px 0;">
                     <span class="graduation-emoji">👯‍♀️</span>
