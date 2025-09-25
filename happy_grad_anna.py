@@ -1224,7 +1224,7 @@ def main():
                                 <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📹</div>
                                 <div class="video-title">Video {video_idx + 1} - Coming Soon!</div>
                                 <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #666; text-align: center;">
-                                    More cute ANNA moments to be added!
+                                    Send Nai ki
                                 </p>
                             </div>
                         """, unsafe_allow_html=True)
