@@ -685,7 +685,7 @@ def local_css():
     """, unsafe_allow_html=True)
 
 # Security: password verification
-HASHED_PASSWORD = "5c5a268702708ababeb96ed61de8b127c9f49bedc1effcd70d4aded37beace10"
+HASHED_PASSWORD = "83d8d394e2f34565fab84e6a303cd166fb32eb01fe9e0f1302daa01eabe9b7f8"
 
 def verify_password(plain_text: str) -> bool:
     try:
