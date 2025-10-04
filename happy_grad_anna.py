@@ -1143,19 +1143,19 @@ def main():
                     """, unsafe_allow_html=True)
 
         
-        # Video section
-        st.markdown("""
-            <h3 style="font-family: 'Cormorant Garamond', serif; text-align: center; margin: 60px 0 30px; background: linear-gradient(45deg, #d8b4fe, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 700;">
-                🎬 Featuring Cute Anna in Cute Videos 🎬
-            </h3>
-        """, unsafe_allow_html=True)
+
     
     # Video container with 2 rows of 3 videos each
     video_files = [
         "ana1.mp4", "ana2.mp4", "ana3.mp4",
         "ana4.mp4", "ana5.mp4", "ana6.mp4"
     ]
-    
+            # Video section
+    st.markdown("""
+            <h3 style="font-family: 'Cormorant Garamond', serif; text-align: center; margin: 60px 0 30px; background: linear-gradient(45deg, #d8b4fe, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 700;">
+                🎬 Featuring Cute Anna in Cute Videos 🎬
+            </h3>
+        """, unsafe_allow_html=True)
     # Create two rows of videos
     for row in range(2):
         cols = st.columns(3)
