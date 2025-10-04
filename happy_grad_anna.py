@@ -1056,92 +1056,99 @@ def main():
                 st.error("No password available")
     
     # Image container with 3 images in a row
-    image_files = ["ana1.jpg", "ana2.jpg","ana3.jpg","ana4.jpg"]
-    cols = st.columns(3)
-    
-    for col_idx, image_item in enumerate(image_files):
-        with cols[col_idx]:
-            if image_item == "Coming Soon":
-                # Placeholder for third image
-                st.markdown(f"""
-                    <div class="image-container">
-                        <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📷</div>
-                        <div class="image-title">More Photos Coming Soon!</div>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                            More beautiful memories with ANNA to be added!
-                        </p>
-                    </div>
-                """, unsafe_allow_html=True)
-                continue
-            
-            image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_item)
-            image_key = f"image_{col_idx}"
-            
-            # Initialize session state for this image
-            if f"decrypted_{image_key}" not in st.session_state:
-                st.session_state[f"decrypted_{image_key}"] = None
-            
-            if os.path.exists(image_path):
-                # Individual decrypt button for each image
-                if st.button(f"🔓 Decrypt {image_item}", key=f"decrypt_{image_key}"):
-                    password = st.session_state.get('user_password', '')
-                    if password:
-                        with st.spinner(f"Decrypting {image_item}..."):
-                            decrypted_bytes = decrypt_image(image_path, password)
-                            if decrypted_bytes:
-                                st.session_state[f"decrypted_{image_key}"] = decrypted_bytes
-                                st.success(f"{image_item} decrypted successfully!")
-                            else:
-                                st.error(f"Failed to decrypt {image_item}")
-                    else:
-                        st.error("No password available")
-                
-                # Display image if decrypted
-                if st.session_state[f"decrypted_{image_key}"]:
-                    decrypted_image_bytes = st.session_state[f"decrypted_{image_key}"]
-                    try:
-                        # Display image in container
-                        st.markdown(f"""
-                            <div class="image-container">
-                                <div class="image-title">{image_item} - Beautiful ANNA! 💜</div>
-                            </div>
-                        """, unsafe_allow_html=True)
-                        
-                        # Create PIL image from bytes for display
-                        image = Image.open(io.BytesIO(decrypted_image_bytes))
-                        st.image(image, use_container_width=True, caption=f"Beautiful memories with ANNA - {image_item}")
-                        
-                    except Exception as e:
-                        st.error(f"Error loading {image_item}: {e}")
-                else:
-                    # Placeholder for encrypted image
+    # Image container with 3 images in a row
+    image_files = ["ana1.jpg", "ana2.jpg", "ana3.jpg", "ana4.jpg"]  # you can add more here
+    cols_per_row = 3
+
+    for i in range(0, len(image_files), cols_per_row):
+        row_images = image_files[i:i+cols_per_row]
+        cols = st.columns(len(row_images))
+
+        for col_idx, image_item in enumerate(row_images):
+            with cols[col_idx]:
+                if image_item == "Coming Soon":
+                    # Placeholder for coming soon image
                     st.markdown(f"""
                         <div class="image-container">
-                            <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">🔒</div>
-                            <div class="image-title">Encrypted {image_item}</div>
+                            <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📷</div>
+                            <div class="image-title">More Photos Coming Soon!</div>
                             <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                                Click decrypt to see beautiful ANNA moments!
+                                More beautiful memories with ANNA to be added!
                             </p>
                         </div>
                     """, unsafe_allow_html=True)
-            else:
-                # Placeholder for missing image file
-                st.markdown(f"""
-                    <div class="image-container">
-                        <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📸</div>
-                        <div class="image-title">{image_item} - Coming Soon!</div>
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
-                            Beautiful ANNA photo to be added!
-                        </p>
-                    </div>
-                """, unsafe_allow_html=True)
-    
-    # Video section
-    st.markdown("""
-        <h3 style="font-family: 'Cormorant Garamond', serif; text-align: center; margin: 60px 0 30px; background: linear-gradient(45deg, #d8b4fe, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 700;">
-            🎬 Featuring Cute Anna in Cute Videos 🎬
-        </h3>
-    """, unsafe_allow_html=True)
+                    continue
+
+                image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_item)
+                image_key = f"image_{i}_{col_idx}"
+
+                # Initialize session state for this image
+                if f"decrypted_{image_key}" not in st.session_state:
+                    st.session_state[f"decrypted_{image_key}"] = None
+
+                if os.path.exists(image_path):
+                    # Individual decrypt button for each image
+                    if st.button(f"🔓 Decrypt {image_item}", key=f"decrypt_{image_key}"):
+                        password = st.session_state.get('user_password', '')
+                        if password:
+                            with st.spinner(f"Decrypting {image_item}..."):
+                                decrypted_bytes = decrypt_image(image_path, password)
+                                if decrypted_bytes:
+                                    st.session_state[f"decrypted_{image_key}"] = decrypted_bytes
+                                    st.success(f"{image_item} decrypted successfully!")
+                                else:
+                                    st.error(f"Failed to decrypt {image_item}")
+                        else:
+                            st.error("No password available")
+
+                    # Display image if decrypted
+                    if st.session_state[f"decrypted_{image_key}"]:
+                        decrypted_image_bytes = st.session_state[f"decrypted_{image_key}"]
+                        try:
+                            # Display image in container
+                            st.markdown(f"""
+                                <div class="image-container">
+                                    <div class="image-title">{image_item} - Beautiful ANNA! 💜</div>
+                                </div>
+                            """, unsafe_allow_html=True)
+
+                            # Create PIL image from bytes for display
+                            image = Image.open(io.BytesIO(decrypted_image_bytes))
+                            st.image(image, use_container_width=True,
+                                    caption=f"Beautiful memories with ANNA - {image_item}")
+
+                        except Exception as e:
+                            st.error(f"Error loading {image_item}: {e}")
+                    else:
+                        # Placeholder for encrypted image
+                        st.markdown(f"""
+                            <div class="image-container">
+                                <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">🔒</div>
+                                <div class="image-title">Encrypted {image_item}</div>
+                                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
+                                    Click decrypt to see beautiful ANNA moments!
+                                </p>
+                            </div>
+                        """, unsafe_allow_html=True)
+                else:
+                    # Placeholder for missing image file
+                    st.markdown(f"""
+                        <div class="image-container">
+                            <div style="font-size: 3rem; margin-bottom: 15px; text-align: center;">📸</div>
+                            <div class="image-title">{image_item} - Coming Soon!</div>
+                            <p style="font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: #b0b0b0; text-align: center;">
+                                Beautiful ANNA photo to be added!
+                            </p>
+                        </div>
+                    """, unsafe_allow_html=True)
+
+        
+        # Video section
+        st.markdown("""
+            <h3 style="font-family: 'Cormorant Garamond', serif; text-align: center; margin: 60px 0 30px; background: linear-gradient(45deg, #d8b4fe, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem; font-weight: 700;">
+                🎬 Featuring Cute Anna in Cute Videos 🎬
+            </h3>
+        """, unsafe_allow_html=True)
     
     # Video container with 2 rows of 3 videos each
     video_files = [
