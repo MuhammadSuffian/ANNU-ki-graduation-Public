@@ -844,13 +844,13 @@ def fancy_header(text, element_class="shimmer-text", tag="h1"):
 def get_personal_memories():
     return [
         "Our legendary late-night study sessions (and snack attacks) - you're so cute, ANNA!",
-        "Laughing until we cried over the silliest things - your humor is the best, Fatima!",
-        "Taking goofy graduation cap selfies together - I love the child in you, bestie!",
+        "Laughing until we cried over the silliest things - your humor is the best, AAMNA!",
+        "Taking goofy graduation cap selfies together - I love the child(Totla wala specially) in you, bestie!",
         "Cheering each other on through every exam and meltdown - you're so good and loyal!",
         "Our secret bestie handshake before big presentations - you're my best friend forever!",
         "Dancing in the dorm room after good news - you're so cute and full of humor!",
         "All the inside jokes only we understand, Bestie! You're so good and loyal, ANNA!",
-        "Dreaming about our future adventures together - I love your child-like spirit, Fatima!"
+        "Dreaming about our future adventures together - I love your child-like spirit, AAMNA!"
     ]
 
 # Check if today is Eid
@@ -1254,7 +1254,7 @@ def main():
             </h3>
             
              <p style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: #7c3aed; margin-bottom: 40px;">
-                 Love you forever, Anna! You're so cute, have such good nature, and though you're shorter than me, you're the tallest in my heart! My best friend from Foundation University Islamabad! Here's to your big day and all our future adventures after BSSE! 👯‍♀️💖 You're amazing - who would have thought our 4+ years of friendship would lead us both to graduation together? �
+                 Bestie forever, Anna! You're so cute, have such good nature, and though you're shorter than me, you're the tallest in my heart! My best friend from Foundation University Islamabad! Here's to your big day and all our future adventures after BSSE! 👯‍♀️💖 You're amazing - who would have thought our 4+ years of friendship would lead us both to graduation together? �
              </p>
     </div>
                 </style>
@@ -1271,7 +1271,7 @@ def main():
                     Bestie, you're a star!
                 </h3>
                 <p style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: #7c3aed;">
-                    Here's to us, to you, and to all the memories we'll make. Love you, Fatima!
+                    Here's to us, to you, and to all the memories we'll make, AAMNA!
                 </p>
                 <div style="font-size: 50px; margin: 20px 0;">
                     <span class="graduation-emoji">👯‍♀️</span>
