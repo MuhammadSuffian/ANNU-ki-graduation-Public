@@ -1040,7 +1040,7 @@ def main():
         if st.button("🔓 Decrypt All Images", key="decrypt_all_images", use_container_width=True):
             password = st.session_state.get('user_password', '')
             if password:
-                image_files = ["Anna1.jpg", "Anna2.jpg","Anna3.jpg"]
+                image_files = ["ana1.jpg", "ana2.jpg","ana3.jpg","ana4.jpg", "ana5.jpg","ana6.jpg"]
                 for i, image_file in enumerate(image_files):
                     image_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), image_file)
                     if os.path.exists(image_path):
