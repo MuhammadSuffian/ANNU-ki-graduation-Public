@@ -1056,7 +1056,7 @@ def main():
                 st.error("No password available")
     
     # Image container with 3 images in a row
-    image_files = ["ana1.jpg", "ana2.jpg","ana3.jpg"]
+    image_files = ["ana1.jpg", "ana2.jpg","ana3.jpg","ana4.jpg"]
     cols = st.columns(3)
     
     for col_idx, image_item in enumerate(image_files):
