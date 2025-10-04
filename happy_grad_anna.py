@@ -1057,7 +1057,7 @@ def main():
     
     # Image container with 3 images in a row
     # Image container with 3 images in a row
-    image_files = ["ana1.jpg", "ana2.jpg", "ana3.jpg", "ana4.jpg"]  # you can add more here
+    image_files = ["ana1.jpg", "ana2.jpg","ana3.jpg","ana4.jpg", "ana5.jpg","ana6.jpg"]
     cols_per_row = 3
 
     for i in range(0, len(image_files), cols_per_row):
